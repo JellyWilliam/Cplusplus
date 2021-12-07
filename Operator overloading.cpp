@@ -15,8 +15,8 @@ protected:
 public:
     Matrix(int, int);
     Matrix();
-    Matrix(const Matrix& ob); //конструктор копирования
-    Matrix& operator=(const Matrix&); // конструктор присваивания
+    Matrix(const Matrix& ob); //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
+    Matrix& operator=(const Matrix&); // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїСЂРёСЃРІР°РёРІР°РЅРёСЏ
     Matrix operator*(int)const;
     Matrix operator + (Matrix& ob);
     friend ostream& operator<<(ostream&, const Matrix&);
@@ -27,7 +27,7 @@ public:
     ~Matrix();
 };
 
-// конструктор по умолчанию
+// РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 Matrix::Matrix()
 {
     l = 0;
@@ -35,7 +35,7 @@ Matrix::Matrix()
     matrix = 0;
 }
 
-// конструктор с параметрами – выделяет память заданного  размера и инициализирует элементы матрицы
+// РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё вЂ“ РІС‹РґРµР»СЏРµС‚ РїР°РјСЏС‚СЊ Р·Р°РґР°РЅРЅРѕРіРѕ  СЂР°Р·РјРµСЂР° Рё РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚ СЌР»РµРјРµРЅС‚С‹ РјР°С‚СЂРёС†С‹
 
 Matrix::Matrix(int l1, int c1)
 {
@@ -83,7 +83,7 @@ Matrix::~Matrix()
     }
 }
 
-// оператор умножения матрицы на число
+// РѕРїРµСЂР°С‚РѕСЂ СѓРјРЅРѕР¶РµРЅРёСЏ РјР°С‚СЂРёС†С‹ РЅР° С‡РёСЃР»Рѕ
 Matrix Matrix::operator * (int a)const
 {
     Matrix temp(l, c);
@@ -93,7 +93,7 @@ Matrix Matrix::operator * (int a)const
     return temp;
 }
 
-// перегруженная операция ввода матрицы
+// РїРµСЂРµРіСЂСѓР¶РµРЅРЅР°СЏ РѕРїРµСЂР°С†РёСЏ РІРІРѕРґР° РјР°С‚СЂРёС†С‹
 
 istream& operator >> (istream& in, Matrix& ob)
 {
@@ -106,13 +106,13 @@ istream& operator >> (istream& in, Matrix& ob)
     return in;
 }
 
-// перегруженная операция вывода матрицы
+// РїРµСЂРµРіСЂСѓР¶РµРЅРЅР°СЏ РѕРїРµСЂР°С†РёСЏ РІС‹РІРѕРґР° РјР°С‚СЂРёС†С‹
 
 ostream& operator<<(ostream& out, const Matrix& ob)
 {
     if (ob.matrix != 0)
     {
-        out << "Матрица:" << endl;
+        out << "РњР°С‚СЂРёС†Р°:" << endl;
         for (int i = 0; i < ob.l; i++)
         {
             for (int j = 0; j < ob.c; j++)
@@ -121,7 +121,7 @@ ostream& operator<<(ostream& out, const Matrix& ob)
         }
     }
     else
-        out << "Матрица пуста" << endl;
+        out << "РњР°С‚СЂРёС†Р° РїСѓСЃС‚Р°" << endl;
     return out;
 }
 
@@ -130,9 +130,9 @@ Matrix Matrix::operator + (Matrix& ob)
 {
     if (c == ob.c)
     {
-        // создание матрицы-результата
+        // СЃРѕР·РґР°РЅРёРµ РјР°С‚СЂРёС†С‹-СЂРµР·СѓР»СЊС‚Р°С‚Р°
         Matrix temp(l, ob.c);
-        // заполнение матрицы-результата
+        // Р·Р°РїРѕР»РЅРµРЅРёРµ РјР°С‚СЂРёС†С‹-СЂРµР·СѓР»СЊС‚Р°С‚Р°
         for (int i = 0; i < l; i++)
             for (int j = 0; j < ob.c; j++)
                 temp.matrix[i][j] = matrix[i][j] + ob.matrix[i][j];
@@ -146,18 +146,18 @@ Matrix& Matrix::operator = (const Matrix& ob)
 {
     if (c != ob.c || l != ob.l)
     {
-        // освобождение памяти в левом операнде
+        // РѕСЃРІРѕР±РѕР¶РґРµРЅРёРµ РїР°РјСЏС‚Рё РІ Р»РµРІРѕРј РѕРїРµСЂР°РЅРґРµ
         for (int i = 0; i < l; i++)
             delete[] matrix[i];
         delete[] matrix;
-        // выделение памяти в левом операнде
+        // РІС‹РґРµР»РµРЅРёРµ РїР°РјСЏС‚Рё РІ Р»РµРІРѕРј РѕРїРµСЂР°РЅРґРµ
         c = ob.c;
         l = ob.l;
         matrix = new int* [l];
         for (int i = 0; i < l; i++)
             matrix[i] = new int[c];
     }
-    // копирование данных правого операнда в левый
+    // РєРѕРїРёСЂРѕРІР°РЅРёРµ РґР°РЅРЅС‹С… РїСЂР°РІРѕРіРѕ РѕРїРµСЂР°РЅРґР° РІ Р»РµРІС‹Р№
     for (int i = 0; i < l; i++)
         for (int j = 0; j < c; j++)
             matrix[i][j] = ob.matrix[i][j];
@@ -167,7 +167,7 @@ Matrix& Matrix::operator = (const Matrix& ob)
 Matrix Matrix::transpositionColumn(Matrix& ob)
 {
     Matrix temp(l, c);
-    cout << "Вектор транспозиции столбца (2 числа): ";
+    cout << "Р’РµРєС‚РѕСЂ С‚СЂР°РЅСЃРїРѕР·РёС†РёРё СЃС‚РѕР»Р±С†Р° (2 С‡РёСЃР»Р°): ";
     int n = 0;
     int* arr1 = new int[c];
     for (int i = 0; i < c; i++)
@@ -193,7 +193,7 @@ Matrix Matrix::transpositionColumn(Matrix& ob)
 Matrix Matrix::transpositionLine(Matrix& ob)
 {
     Matrix temp(l, c);
-    cout << "Вектор транспозиции строки (2 числа): ";
+    cout << "Р’РµРєС‚РѕСЂ С‚СЂР°РЅСЃРїРѕР·РёС†РёРё СЃС‚СЂРѕРєРё (2 С‡РёСЃР»Р°): ";
     int n = 0;
     int* arr2 = new int[l];
     for (int i = 0; i < l; i++)
@@ -222,7 +222,7 @@ class QMatrix : public Matrix
 {
 public:
 
-    // оператор присваивания
+    // РѕРїРµСЂР°С‚РѕСЂ РїСЂРёСЃРІР°РёРІР°РЅРёСЏ
     QMatrix& operator = (const Matrix& ob)
     {
         Matrix::operator = (ob);
@@ -238,7 +238,7 @@ public:
 
     }
 
-    // конструктор по умолчанию
+    // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
     QMatrix() :Matrix()
     {
 
@@ -250,9 +250,9 @@ public:
     {
         if (c == ob.l)
         {
-            // создание матрицы-результата
+            // СЃРѕР·РґР°РЅРёРµ РјР°С‚СЂРёС†С‹-СЂРµР·СѓР»СЊС‚Р°С‚Р°
             QMatrix temp(ob.c);
-            // заполнение матрицы-результата
+            // Р·Р°РїРѕР»РЅРµРЅРёРµ РјР°С‚СЂРёС†С‹-СЂРµР·СѓР»СЊС‚Р°С‚Р°
             for (int i = 0; i < l; i++)
                 for (int j = 0; j < ob.c; j++)
                     for (int k = 0; k < c; k++)
@@ -262,7 +262,7 @@ public:
         }
     }
 
-    // Транспонированеи матрицы
+    // РўСЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРµРё РјР°С‚СЂРёС†С‹
     QMatrix operator !()
     {
         QMatrix temp(c);
@@ -278,38 +278,38 @@ public:
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    cout << "Введите матрицу a с размером 2*3: " << endl;
+    cout << "Р’РІРµРґРёС‚Рµ РјР°С‚СЂРёС†Сѓ a СЃ СЂР°Р·РјРµСЂРѕРј 2*3: " << endl;
     Matrix a(2, 3), d(2, 3);
     cin >> a;
-    cout << "Введите матрицу d с размером 2*3: " << endl;
+    cout << "Р’РІРµРґРёС‚Рµ РјР°С‚СЂРёС†Сѓ d СЃ СЂР°Р·РјРµСЂРѕРј 2*3: " << endl;
     cin >> d;
-    cout << "Введённые матрицы: " << endl;
+    cout << "Р’РІРµРґС‘РЅРЅС‹Рµ РјР°С‚СЂРёС†С‹: " << endl;
     cout << a << endl;
     cout << d << endl;
-    cout << "Матрица c = a * 5: " << endl;
+    cout << "РњР°С‚СЂРёС†Р° c = a * 5: " << endl;
     Matrix c = a * 5;
     cout << c << endl;
-    cout << "Матрица r = a + d: " << endl;
+    cout << "РњР°С‚СЂРёС†Р° r = a + d: " << endl;
     Matrix r = a + d;
     cout << r;
-    cout << "Транспонированная матрица а: " << endl;
+    cout << "РўСЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРЅР°СЏ РјР°С‚СЂРёС†Р° Р°: " << endl;
     cout << a.transpositionColumn(r);
-    cout << "Введите матрицу o с размером 2*2: ";
+    cout << "Р’РІРµРґРёС‚Рµ РјР°С‚СЂРёС†Сѓ o СЃ СЂР°Р·РјРµСЂРѕРј 2*2: ";
     QMatrix o(2), u(2);
     cin >> o;
-    cout << "Введите матрицу u с размером 2*2: ";
+    cout << "Р’РІРµРґРёС‚Рµ РјР°С‚СЂРёС†Сѓ u СЃ СЂР°Р·РјРµСЂРѕРј 2*2: ";
     cin >> u;
-    cout << "Введённые матрицы: " << endl;
+    cout << "Р’РІРµРґС‘РЅРЅС‹Рµ РјР°С‚СЂРёС†С‹: " << endl;
     cout << o << endl;
     cout << u << endl;
-    cout << "Матрица t = o * u: " << endl;
+    cout << "РњР°С‚СЂРёС†Р° t = o * u: " << endl;
     QMatrix t = o * u;
     cout << t << endl;
-    cout << "Транспонированная матрица t: ";
+    cout << "РўСЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРЅР°СЏ РјР°С‚СЂРёС†Р° t: ";
     cout << !t << endl;
     cout << t.transpositionColumn(t);
     cout << t.transpositionLine(t);
-    cout << "Матрица v = o * 5: " << endl;
+    cout << "РњР°С‚СЂРёС†Р° v = o * 5: " << endl;
     QMatrix v = o * 5;
     cout << v;
     cout << "o + u: " << endl;
